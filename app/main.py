@@ -17,7 +17,7 @@ app = FastAPI()
 def home()->dict:
     return ({"message": "you are at index"})
 
-@app.post(path="/posts", status_code=status.HTTP_201_CREATED)
+@app.post(path="/posts", status_code=status.HTTP_201_CREATED, response_model=PostResponse)
 def create_post(post: PostCreate, db:SessionDep):
     new_post = models.Post(**post.model_dump())
 
@@ -25,6 +25,7 @@ def create_post(post: PostCreate, db:SessionDep):
     db.commit()
     db.refresh(new_post)
     return new_post
+
 
 @app.get(path="/posts")
 def getPost(title:str=Query(description="Enter the post title"), db: SessionDep = None):
