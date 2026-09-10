@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "postTitle": "The Lighthouse That Collected Teaspoons",
+        "postContent": "Every Tuesday, a brass lighthouse logged the arrival of one lost teaspoon and played a short accordion tune at sunset.",
+        "postDate": "2024-03-18",
+        "postTime": "07:42:15",
+        "rating": 8
+    },
+    {
+        "id": 2,
+        "postTitle": "Cloud Inventory for Wednesday",
+        "postContent": "Three striped clouds, one suspiciously square cloud, and a small fog bank were counted above the abandoned miniature-golf course.",
+        "postDate": "2025-08-06",
+        "postTime": "14:09:31",
+        "rating": 3
+    },
+    {
+        "id": 3,
+        "postTitle": "A Manual for Polite Volcanoes",
+        "postContent": "Chapter one recommends that volcanoes send a postcard before erupting near a village bake sale.",
+        "postDate": "2023-11-27",
+        "postTime": "22:55:04",
+        "rating": 10
+    },
+    {
+        "id": 4,
+        "postTitle": "The Museum of Misplaced Umbrellas",
+        "postContent": "A curator discovered that every umbrella in the east wing opens only when someone remembers a song from childhood.",
+        "postDate": "2026-01-12",
+        "postTime": "11:26:48",
+        "rating": 6
+    },
+    {
+        "id": 5,
+        "postTitle": "Notes from a Sleepy Astronaut",
+        "postContent": "The moon is quieter than advertised, but its rocks make excellent paperweights for floating grocery lists.",
+        "postDate": "2022-06-30",
+        "postTime": "03:18:59",
+        "rating": 1
+    },
+    {
+        "id": 707620,
+        "postTitle": "varsha",
+        "postContent": " hiee ",
+        "postDate": "2026-09-01",
+        "postTime": "22:50:50.402135",
+        "rating": 0
+    }
+]
