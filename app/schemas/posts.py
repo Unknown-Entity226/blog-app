@@ -3,8 +3,6 @@ from uuid import UUID
 from datetime import date, time
 from typing import Optional
 
-
-
 class PostCreate(BaseModel):
     post_title: str
     post_content: str

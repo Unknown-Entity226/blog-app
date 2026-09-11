@@ -1,17 +1,15 @@
 from fastapi import FastAPI, Query, status, HTTPException
 from pydantic import BaseModel, Field
 from .database import engine, SessionDep
-from . import models
+from .models import posts, users
 from uuid import UUID
 from sqlalchemy import select
-from .schemas import PostCreate, PostResponse, UpdatePost
+from .schemas.posts import PostCreate, PostResponse, UpdatePost
 
 
-models.Base.metadata.create_all(bind = engine)
+posts.Base.metadata.create_all(bind = engine)
 
 app = FastAPI()
-
-
 
 @app.get(path="/")
 def home()->dict:
@@ -19,7 +17,7 @@ def home()->dict:
 
 @app.post(path="/posts", status_code=status.HTTP_201_CREATED, response_model=PostResponse)
 def create_post(post: PostCreate, db:SessionDep):
-    new_post = models.Post(**post.model_dump())
+    new_post = posts.Post(**post.model_dump())
 
     db.add(new_post)
     db.commit()
@@ -30,7 +28,7 @@ def create_post(post: PostCreate, db:SessionDep):
 @app.get(path="/posts")
 def getPost(title:str=Query(description="Enter the post title"), db: SessionDep = None):
 
-    statement = select(models.Post).where(models.Post.post_title.ilike(f"%{title}%"))
+    statement = select(posts.Post).where(posts.Post.post_title.ilike(f"%{title}%"))
     results = db.scalars(statement).all()
     if not results:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No result found")
@@ -40,7 +38,7 @@ def getPost(title:str=Query(description="Enter the post title"), db: SessionDep 
 @app.delete(path="/posts/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def deletePost(id: UUID, db: SessionDep):
 
-    statement = select(models.Post).where(models.Post.id == id)
+    statement = select(posts.Post).where(posts.Post.id == id)
     result = db.scalar(statement)
 
     if result is None:
@@ -50,10 +48,10 @@ def deletePost(id: UUID, db: SessionDep):
     db.commit()
 
 
-@app.put(path="/posts/{id}")
+@app.put(path="/posts/{id}", response_model = PostResponse )
 def updatePost(id:UUID, post:UpdatePost, db:SessionDep):
 
-    statement = select(models.Post).where(models.Post.id == id)
+    statement = select(posts.Post).where(posts.Post.id == id)
 
     existing = db.scalar(statement)
 

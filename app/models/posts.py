@@ -1,8 +1,10 @@
-from .database import Base
+from ..database import Base
 from sqlalchemy import Integer, String, Date, Time, Text, UUID, text
 from sqlalchemy.orm import Mapped, mapped_column
 from datetime import date, time
 import uuid
+
+
 class Post(Base):
     __tablename__ = "posts"
 
