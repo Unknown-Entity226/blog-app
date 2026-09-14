@@ -6,10 +6,15 @@ from uuid import UUID
 
 from ..models.users import User
 from ..schemas.users import UserCreate, UserUpdate
-
+from ..utils.security import hash_pass
 
 def create_user(db: Session, user: UserCreate):
-    new_user = User(**user.model_dump())
+
+    user_data = user.model_dump()
+    password = user_data.pop("password")
+    user_data["password_hash"] = hash_pass(password)
+
+    new_user = User(**user_data)
 
     db.add(new_user)
     try:

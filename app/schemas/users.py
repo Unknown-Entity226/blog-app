@@ -6,11 +6,10 @@ from datetime import datetime
 class UserCreate(BaseModel):
     username: str
     email: str
-    password_hash: str
+    password: str
 
 
 class UserResponse(BaseModel):
-    id: UUID
     username: str
     email: str
     created_at: datetime
@@ -22,5 +21,7 @@ class UserResponse(BaseModel):
 class UserUpdate(BaseModel):
     username: str | None = None
     email: str | None = None
-    password_hash: str | None = None
+    password: str | None = None
+    update_at: datetime
+
     
