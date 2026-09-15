@@ -1,5 +1,4 @@
 from pydantic import BaseModel, ConfigDict
-from uuid import UUID
 from datetime import datetime
 
 
@@ -22,6 +21,5 @@ class UserUpdate(BaseModel):
     username: str | None = None
     email: str | None = None
     password: str | None = None
-    update_at: datetime
 
     

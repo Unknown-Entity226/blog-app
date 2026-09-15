@@ -57,6 +57,10 @@ def update_user(db: Session, id: UUID, user: UserUpdate):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"No user with id: {id} found")
 
     updated = user.model_dump(exclude_unset=True)
+    password = updated.pop("password", None)
+    if password is not None:
+        updated["password_hash"] = hash_pass(password)
+
     for key, val in updated.items():
         setattr(existing, key, val)
 
