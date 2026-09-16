@@ -9,4 +9,6 @@ def hash_pass(password: str):
     return hash_pass
 
 
+def verify_pass(password: str, hashed_pass: str):
 
+    return password_hash.verify(password, hashed_pass)
