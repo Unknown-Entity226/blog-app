@@ -2,15 +2,16 @@ from fastapi import HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
+from fastapi.security import OAuth2PasswordRequestForm
 
 from ..models.users import User
-from ..schemas.auth import UserSignUp, UserLogin
+from ..schemas.auth import UserSignUp
 from ..utils.security import hash_pass, verify_pass
+from ..utils.outh2 import create_access_token
 
 
-def get_user_by_email(db: Session, email: str):
-
-    statement = select(User).where(User.email == email)
+def get_user_by_username(db: Session, username: str):
+    statement = select(User).where(User.username == username)
 
     return db.scalar(statement)
 
@@ -42,11 +43,8 @@ def signup_user(db: Session, user: UserSignUp):
     return new_user
 
 
-def login_user(db: Session, user: UserLogin):
-
-    user_data = user.model_dump()
-
-    actual = get_user_by_email(db, user_data["email"])
+def login_user(db: Session, credentials: OAuth2PasswordRequestForm):
+    actual = get_user_by_username(db, credentials.username)
 
     if actual is None:
         raise HTTPException(
@@ -55,12 +53,17 @@ def login_user(db: Session, user: UserLogin):
         )
 
     if not verify_pass(
-        user_data["password"],
-        actual.password_hash
+        credentials.password,
+        actual.password_hash,
     ):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Wrong credentials",
         )
 
-    return actual
+    access_token = create_access_token(data = {"sub": str(actual.id)})
+
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+    }
