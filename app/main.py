@@ -1,12 +1,7 @@
 from fastapi import FastAPI
-from .database import engine
-from .models import posts, users
 from .routers.posts import router as posts_router
 from .routers.users import router as users_router
 from .routers.auth import router as auth_router
-
-
-posts.Base.metadata.create_all(bind = engine)
 
 app = FastAPI()
 

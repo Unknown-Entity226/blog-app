@@ -9,6 +9,7 @@ class PostCreate(BaseModel):
 
 
 class PostResponse(BaseModel):
+
     post_title: str
     post_content: str
     post_date: date
@@ -20,5 +21,4 @@ class PostResponse(BaseModel):
 class UpdatePost(BaseModel):
     post_title: Optional[str] = None
     post_content: Optional[str] = None
-
 
