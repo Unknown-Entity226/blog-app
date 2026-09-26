@@ -1,4 +1,4 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import AliasPath, BaseModel, ConfigDict, Field
 from uuid import UUID
 from datetime import date, time
 from typing import Optional
@@ -12,6 +12,7 @@ class PostResponse(BaseModel):
 
     post_title: str
     post_content: str
+    username: str = Field(validation_alias=AliasPath("user", "username"))
     post_date: date
     post_time: time
     rating: int

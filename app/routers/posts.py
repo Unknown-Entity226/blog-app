@@ -36,9 +36,8 @@ def create(
 def get_post(
     db: SessionDep,
     title: str = Query(description="Enter the post title"),
-    current_user: TokenData = Depends(get_current_user),
 ):
-    return get_posts(db, title, get_current_user_id(current_user))
+    return get_posts(db, title)
 
 
 @router.delete(path="/{id}", status_code=status.HTTP_204_NO_CONTENT)

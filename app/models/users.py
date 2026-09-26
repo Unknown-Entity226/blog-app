@@ -1,8 +1,14 @@
+from __future__ import annotations
+
 from ..database import Base
 from sqlalchemy import Integer, String, DateTime, UUID, text, func
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from datetime import datetime
+from typing import TYPE_CHECKING
 import uuid
+
+if TYPE_CHECKING:
+    from .posts import Post
 
 
 class User(Base):
@@ -29,4 +35,5 @@ class User(Base):
         onupdate=func.now(),
     )
 
+    posts: Mapped[list["Post"]] = relationship("Post", back_populates="user")
  

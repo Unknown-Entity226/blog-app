@@ -17,9 +17,8 @@ def create_post(db: Session, post: PostCreate, user_id: UUID):
     return new_post
 
 
-def get_posts(db: Session, title: str, user_id: UUID):
+def get_posts(db: Session, title: str):
     statement = select(Post).where(
-        Post.user_id == user_id,
         Post.post_title.ilike(f"%{title}%"),
     )
     results = db.scalars(statement).all()

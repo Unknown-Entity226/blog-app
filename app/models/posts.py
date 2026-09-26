@@ -1,8 +1,14 @@
+from __future__ import annotations
+
 from ..database import Base
 from sqlalchemy import Integer, String, Date, Time, Text, UUID, text, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from datetime import date, time
+from typing import TYPE_CHECKING
 import uuid
+
+if TYPE_CHECKING:
+    from .users import User
 
 class Post(Base):
     __tablename__ = "posts"
@@ -20,3 +26,5 @@ class Post(Base):
     post_time: Mapped[time] = mapped_column(Time, nullable=False, server_default=text('CURRENT_TIME'))
 
     rating: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+
+    user: Mapped["User"] = relationship("User", back_populates="posts")
