@@ -1,5 +1,4 @@
 from pydantic import AliasPath, BaseModel, ConfigDict, Field
-from uuid import UUID
 from datetime import date, time
 from typing import Optional
 
