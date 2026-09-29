@@ -1,6 +1,7 @@
-from pydantic import BaseModel, ConfigDict
-from datetime import datetime
-import uuid
+from pydantic import BaseModel, ConfigDict, Field, AliasPath
 
-class Vote(BaseModel):
-    post_id: 
+class VoteResponse(BaseModel):
+    post_title: str = Field(validation_alias=AliasPath("post", "post_title"))
+    vote_type: int
+
+    model_config = ConfigDict(from_attributes=True)

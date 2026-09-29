@@ -21,8 +21,8 @@ class Vote(Base):
 
     vote_type: Mapped[int] = mapped_column(Integer, nullable=False)
 
-    post: Mapped["Post"] = relationship(back_populates="votes")
-    user: Mapped["User"] = relationship(back_populates="votes")
+    post: Mapped["Post"] = relationship("Post", back_populates="votes")
+    user: Mapped["User"] = relationship("User", back_populates="votes")
 
     __table_args__=(
         CheckConstraint(

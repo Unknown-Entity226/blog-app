@@ -30,4 +30,4 @@ class Post(Base):
 
     user: Mapped["User"] = relationship("User", back_populates="posts")
 
-    vote: Mapped[list["Vote"]] = relationship(back_populates="post", cascade="all, delete-orphan")
+    votes: Mapped[list["Vote"]] = relationship("Vote", back_populates="post", cascade="all, delete-orphan")
