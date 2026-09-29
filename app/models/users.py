@@ -9,6 +9,7 @@ import uuid
 
 if TYPE_CHECKING:
     from .posts import Post
+    from .votes import Vote
 
 
 class User(Base):
@@ -36,4 +37,6 @@ class User(Base):
     )
 
     posts: Mapped[list["Post"]] = relationship("Post", back_populates="user", cascade="all,  delete-orphan")
- 
+
+
+    vote: Mapped[list["Vote"]] = relationship(back_populates="user", cascade="all, delete-orphan")

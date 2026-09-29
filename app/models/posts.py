@@ -9,6 +9,7 @@ import uuid
 
 if TYPE_CHECKING:
     from .users import User
+    from .votes import Vote
 
 class Post(Base):
     __tablename__ = "posts"
@@ -28,3 +29,5 @@ class Post(Base):
     rating: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
 
     user: Mapped["User"] = relationship("User", back_populates="posts")
+
+    vote: Mapped[list["Vote"]] = relationship(back_populates="post", cascade="all, delete-orphan")
