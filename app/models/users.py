@@ -35,5 +35,5 @@ class User(Base):
         onupdate=func.now(),
     )
 
-    posts: Mapped[list["Post"]] = relationship("Post", back_populates="user")
+    posts: Mapped[list["Post"]] = relationship("Post", back_populates="user", cascade="all,  delete-orphan")
  
