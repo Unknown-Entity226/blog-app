@@ -10,6 +10,7 @@ from alembic import context
 from app.database import Base
 from app.models.posts import Post
 from app.models.users import User
+from app.models.votes import Vote
 
 
 from dotenv import load_dotenv

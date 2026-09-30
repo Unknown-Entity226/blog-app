@@ -23,11 +23,7 @@ def get_current_user_id(current_user: TokenData) -> UUID:
 
 
 @router.post(path="/{post_id}", status_code=status.HTTP_201_CREATED, response_model=VoteResponse)
-def vote(
-    post_id: UUID,
-    vote: VoteCreate,
-    db: SessionDep,
-    current_user: TokenData = Depends(get_current_user),
+def vote(post_id: UUID, vote: VoteCreate, db: SessionDep, current_user: TokenData = Depends(get_current_user),
 ):
     return vote_create(db, vote, post_id, get_current_user_id(current_user))
 
