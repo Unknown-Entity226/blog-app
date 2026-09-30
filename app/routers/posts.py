@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from uuid import UUID
 from ..database import SessionDep
-from ..schemas.posts import PostCreate, PostResponse, UpdatePost
+from ..schemas.posts import PostCreate, PostListResponse, PostResponse, UpdatePost
 from ..services.post_service import create_post, delete_post, get_posts, update_post
 from ..utils.outh2 import get_current_user
 from ..schemas.auth import TokenData
@@ -32,7 +32,7 @@ def create(
     return create_post(db, post, get_current_user_id(current_user))
 
 
-@router.get(path="")
+@router.get(path="", response_model=PostListResponse)
 def get_post(
     db: SessionDep,
     title: str = Query(description="Enter the post title"),

@@ -26,7 +26,12 @@ class Post(Base):
 
     post_time: Mapped[time] = mapped_column(Time, nullable=False, server_default=text('CURRENT_TIME'))
 
-    rating: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    upvotes: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    downvotes: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+
+    @property
+    def rating(self) -> int:
+        return self.upvotes - self.downvotes
 
     user: Mapped["User"] = relationship("User", back_populates="posts")
 

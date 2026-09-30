@@ -8,7 +8,7 @@ from ..schemas.users import UserResponse
 from ..services.auth_service import login_user, signup_user
 
 
-router = APIRouter(prefix="/auth", tags=["Authetication"])
+router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
 @router.post("/signup", status_code=status.HTTP_201_CREATED, response_model=UserResponse)

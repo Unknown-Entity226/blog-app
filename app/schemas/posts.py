@@ -14,9 +14,16 @@ class PostResponse(BaseModel):
     username: str = Field(validation_alias=AliasPath("user", "username"))
     post_date: date
     post_time: time
+    upvotes: int
+    downvotes: int
     rating: int
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class PostListResponse(BaseModel):
+    data: list[PostResponse]
+
 
 class UpdatePost(BaseModel):
     post_title: Optional[str] = None
